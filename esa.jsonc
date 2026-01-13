@@ -17,8 +17,8 @@
   "kv_namespaces": [
     {
       "binding": "BLOG_KV",
-      "id": "blog-kv-namespace",
-      "preview_id": "blog-kv-preview"
+      "id": "${KV_NAMESPACE_ID}",
+      "preview_id": "${KV_NAMESPACE_PREVIEW_ID}"
     }
   ],
   "routes": [
