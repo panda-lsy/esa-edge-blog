@@ -1,0 +1,42 @@
+import { NextRequest, NextResponse } from 'next/server'
+import { EdgeStorage } from '../../../lib/storage'
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ slug: string }> }
+) {
+  try {
+    const { slug } = await params
+    const kv = (globalThis as any).BLOG_KV
+    if (!kv) {
+      return NextResponse.json(
+        { success: false, error: 'KV storage not available' },
+        { status: 500 }
+      )
+    }
+
+    const storage = new EdgeStorage(kv)
+    const result = await storage.getPostBySlug(slug)
+
+    if (!result.success || !result.data) {
+      return NextResponse.json(result, { status: 404 })
+    }
+
+    await storage.incrementPostViews(result.data.id)
+
+    return NextResponse.json({
+      success: true,
+      data: result.data,
+    })
+  } catch (error) {
+    console.error('Error fetching post by slug:', error)
+    return NextResponse.json(
+      {
+        success: false,
+        error:
+          error instanceof Error ? error.message : 'Failed to fetch post by slug',
+      },
+      { status: 500 }
+    )
+  }
+}

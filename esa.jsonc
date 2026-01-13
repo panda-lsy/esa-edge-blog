@@ -1,0 +1,46 @@
+{
+  "$schema": "https://schema.esa.aliyun.com/pages-config.1.0.json",
+  "name": "esa-edge-blog",
+  "description": "现代化的边缘博客平台，基于 ESA Pages + KV Storage 构建",
+  "version": "1.0.0",
+  "build": {
+    "command": "npm run build",
+    "output": ".next"
+  },
+  "functions": [
+    {
+      "name": "api",
+      "source": "app/api",
+      "runtime": "nodejs20.x"
+    }
+  ],
+  "kv_namespaces": [
+    {
+      "binding": "BLOG_KV",
+      "id": "blog-kv-namespace",
+      "preview_id": "blog-kv-preview"
+    }
+  ],
+  "routes": [
+    {
+      "pattern": "/api/*",
+      "function": "api"
+    },
+    {
+      "pattern": "/",
+      "function": "api"
+    },
+    {
+      "pattern": "/*",
+      "function": "api"
+    }
+  ],
+  "env": {
+    "production": {
+      "NODE_ENV": "production"
+    },
+    "preview": {
+      "NODE_ENV": "development"
+    }
+  }
+}
