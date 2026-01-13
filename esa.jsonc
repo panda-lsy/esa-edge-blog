@@ -8,7 +8,7 @@
     "output": ".next"
   },
   "assets": {
-    "directory": "./dist",
+    "directory": ".next/static",
     "notFoundStrategy": "singlePageApplication"
   },
   "functions": [
@@ -31,16 +31,16 @@
       "function": "api"
     },
     {
+      "pattern": "/static/*",
+      "static": true
+    },
+    {
       "pattern": "/_next/*",
       "static": true
     },
     {
-      "pattern": "static/*",
-      "static": true
-    },
-    {
       "pattern": "/*",
-      "function": "api"
+      "static": true
     }
   ],
   "env": {
