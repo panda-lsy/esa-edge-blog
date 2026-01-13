@@ -7,7 +7,10 @@
     "command": "npm run build",
     "output": ".next"
   },
-  "assets": "public",
+  "assets": {
+    "directory": "./dist",
+    "notFoundStrategy": "singlePageApplication"
+  },
   "functions": [
     {
       "name": "api",
