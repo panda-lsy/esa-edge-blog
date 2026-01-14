@@ -31,16 +31,20 @@
       "function": "api"
     },
     {
-      "pattern": "/static/*",
+      "pattern": "/_next/static/*",
       "static": true
     },
     {
-      "pattern": "/_next/*",
+      "pattern": "/favicon.svg",
+      "static": true
+    },
+    {
+      "pattern": "/robots.txt",
       "static": true
     },
     {
       "pattern": "/*",
-      "static": true
+      "function": "api"
     }
   ],
   "env": {
